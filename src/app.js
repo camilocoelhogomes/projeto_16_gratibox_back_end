@@ -4,6 +4,7 @@ import signUp from './controller/signUp/signUp.js';
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 
 app.get('/is-live', (req, res) => res.sendStatus(200));
 

@@ -1,4 +1,4 @@
-import connection from '../dbConfig';
+import connection from '../dbConfig.js';
 
 const signUpFactory = ({
   userName,
