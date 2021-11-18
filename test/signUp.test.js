@@ -4,6 +4,14 @@ import '../src/setup.js';
 import connection from '../src/factoryes/dbConfig';
 import userFactory from './factory/userFactory.js';
 
+beforeAll(async () => {
+  await connection.query('DELETE FROM users');
+});
+
+afterAll(async () => {
+  await connection.query('DELETE FROM users');
+});
+
 describe('POST /sign-up', () => {
   const newUser = userFactory();
 
