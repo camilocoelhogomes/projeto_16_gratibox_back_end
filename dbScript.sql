@@ -1,3 +1,7 @@
+DROP DATABASE projeto_16_test;
+CREATE DATABASE projeto_16_test;
+\c projeto_16_test;
+
 CREATE TABLE "users" (
 	"id" serial NOT NULL,
 	"name" varchar(255) NOT NULL,
@@ -28,7 +32,7 @@ CREATE TABLE "signature" (
 
 CREATE TABLE "plans" (
 	"id" serial NOT NULL,
-	"name" varchar(255) NOT NULL,
+	"name" varchar(255) NOT NULL UNIQUE,
 	CONSTRAINT "Plans_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -36,9 +40,9 @@ CREATE TABLE "plans" (
 
 
 
-CREATE TABLE "produc_options" (
+CREATE TABLE "product_options" (
 	"id" serial NOT NULL,
-	"name" varchar(255) NOT NULL,
+	"name" varchar(255) NOT NULL UNIQUE,
 	CONSTRAINT "produc_options_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -49,7 +53,10 @@ CREATE TABLE "produc_options" (
 CREATE TABLE "address" (
 	"id" bigint NOT NULL,
 	"delivery_address" varchar(255) NOT NULL,
-	"zip_code" varchar(255) NOT NULL
+	"zip_code" varchar(255) NOT NULL,
+	"street" varchar(255) NOT NULL,
+	"street_number" varchar(255) NOT NULL,
+	"neighborhood" varchar(255) NOT NULL
 ) WITH (
   OIDS=FALSE
 );
@@ -61,6 +68,17 @@ ALTER TABLE "signature" ADD CONSTRAINT "signature_fk0" FOREIGN KEY ("plans_id") 
 ALTER TABLE "signature" ADD CONSTRAINT "signature_fk1" FOREIGN KEY ("product_options_id") REFERENCES "produc_options"("id");
 ALTER TABLE "signature" ADD CONSTRAINT "signature_fk2" FOREIGN KEY ("user_id") REFERENCES "users"("id");
 ALTER TABLE "signature" ADD CONSTRAINT "signature_fk3" FOREIGN KEY ("address_id") REFERENCES "address"("id");
+
+INSERT INTO "plans" ("name") VALUES ('semanal');
+INSERT INTO "plans" ("name") VALUES ('mensal');
+
+INSERT INTO "product_options" ("name") VALUES ('Chás');
+INSERT INTO "product_options" ("name") VALUES ('Incensos');
+INSERT INTO "product_options" ("name") VALUES ('Produtos orgânicos');
+
+
+
+
 
 
 

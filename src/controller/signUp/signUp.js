@@ -7,7 +7,6 @@ const signUp = async (req, res) => {
   const validationError = validateSignUp({ signUpObject: newUser });
 
   if (validationError) return res.status(400).send(validationError.details);
-
   const cryptPassword = bcrypt.hashSync(newUser.userPassword, 10);
 
   try {
