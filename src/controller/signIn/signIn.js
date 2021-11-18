@@ -14,6 +14,9 @@ const signIn = async (req, res) => {
     const userObject = {
       userName: dbUser.rows[0].name,
       userToken: jwt.sign({ id: dbUser.rows[0].id }, process.env.JWT_SECRET),
+      userPlan: null,
+      userPlanSignatureDate: null,
+      userAddress: [],
     };
     return res.status(200).send(userObject);
   } catch (error) {

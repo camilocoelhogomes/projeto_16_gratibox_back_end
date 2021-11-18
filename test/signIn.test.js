@@ -25,6 +25,9 @@ describe('POST /sign-in', () => {
     expect(result.status).toEqual(200);
     expect(result.body).toHaveProperty('userName', user.userName);
     expect(result.body).toHaveProperty('userToken');
+    expect(result.body).toHaveProperty('userPlan');
+    expect(result.body).toHaveProperty('userPlanSignatureDate');
+    expect(result.body).toHaveProperty('userAddress');
   });
 
   it('returns 401 for invalid body', async () => {
