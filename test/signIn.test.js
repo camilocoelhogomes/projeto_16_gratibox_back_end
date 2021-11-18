@@ -26,4 +26,9 @@ describe('POST /sign-in', () => {
     expect(result.body).toHaveProperty('userName', user.userName);
     expect(result.body).toHaveProperty('userToken');
   });
+
+  it('returns 400 for invalid body', async () => {
+    const result = await supertest(app).post('/sign-in').send({ userEail: user.userEmail, userPassword: user.userPassword });
+    expect(result.status).toEqual(400);
+  });
 });

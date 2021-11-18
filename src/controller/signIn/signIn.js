@@ -1,8 +1,13 @@
 import jwt from 'jsonwebtoken';
 import signInFactory from '../../factoryes/dbFactoryes/signInFactory';
+import validateSignIn from './validateSignIn';
 
 const signIn = async (req, res) => {
   const user = req.body;
+
+  const validateError = validateSignIn({ signInObject: user });
+  if (validateError) return res.status(400).send(validateError.details);
+
   try {
     const dbUser = await signInFactory(user);
     const userObject = {
