@@ -27,8 +27,13 @@ describe('POST /sign-in', () => {
     expect(result.body).toHaveProperty('userToken');
   });
 
-  it('returns 400 for invalid body', async () => {
+  it('returns 401 for invalid body', async () => {
     const result = await supertest(app).post('/sign-in').send({ userEail: user.userEmail, userPassword: user.userPassword });
-    expect(result.status).toEqual(400);
+    expect(result.status).toEqual(401);
+  });
+
+  it('returns 401 for wrong password', async () => {
+    const result = await supertest(app).post('/sign-in').send({ userEmail: user.userEmail, userPassword: 'abc*123ABC' });
+    expect(result.status).toEqual(401);
   });
 });
