@@ -1,10 +1,11 @@
+DROP DATABASE projeto_16_test;
 CREATE DATABASE projeto_16_test;
 \c projeto_16_test;
 
 CREATE TABLE "users" (
 	"id" serial NOT NULL,
 	"name" varchar(255) NOT NULL,
-	"email" varchar(255) NOT NULL,
+	"email" varchar(255) NOT NULL UNIQUE,
 	"password" varchar(255) NOT NULL,
 	"complete_name" varchar(255),
 	CONSTRAINT "users_pk" PRIMARY KEY ("id")
