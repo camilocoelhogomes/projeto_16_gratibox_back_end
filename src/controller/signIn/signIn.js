@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import signInFactory from '../../factoryes/dbFactoryes/signInFactory';
-import validateSignIn from './validateSignIn';
+import signInFactory from '../../factoryes/dbFactoryes/signInFactory.js';
+import validateSignIn from './validateSignIn.js';
 
 const signIn = async (req, res) => {
   const user = req.body;
