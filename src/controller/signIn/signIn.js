@@ -17,10 +17,25 @@ const signIn = async (req, res) => {
       userToken: jwt.sign({ id: dbUser.rows[0].id }, process.env.JWT_SECRET),
       userPlan: null,
       userPlanSignatureDate: null,
-      userAddress: [],
+      userAddress: null,
+      completeName: null,
+      productOption: null,
+      deliveryDate: null,
     };
     const signature = await userWithSignatureDbFactory({ userId: dbUser.rows[0].id });
-    console.log(signature);
+    if (signature.rowCount) {
+      userObject.completeName = signature.rows[0].completeName;
+      userObject.userPlanSignatureDate = signature.rows[0].userPlanSignatureDate;
+      userObject.userPlan = signature.rows[0].userPlan;
+      userObject.productOption = signature.rows[0].productOption;
+      userObject.deliveryDate = signature.rows[0].deliveryDate;
+      userObject.userAddress = {
+        cep: signature.rows[0].cep,
+        street: signature.rows[0].street,
+        neighborhood: signature.rows[0].neighborhood,
+        number: signature.rows[0].number,
+      };
+    }
     return res.status(200).send(userObject);
   } catch (error) {
     return res.status(500).send(error);
