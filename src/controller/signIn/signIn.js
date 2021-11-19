@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import signInFactory from '../../factoryes/dbFactoryes/signInFactory.js';
 import validateSignIn from './validateSignIn.js';
+import userWithSignatureDbFactory from '../../factoryes/dbFactoryes/userWithSignatureDbFactory.js';
 
 const signIn = async (req, res) => {
   const user = req.body;
@@ -18,6 +19,8 @@ const signIn = async (req, res) => {
       userPlanSignatureDate: null,
       userAddress: [],
     };
+    const signature = await userWithSignatureDbFactory({ userId: dbUser.rows[0].id });
+    console.log(signature);
     return res.status(200).send(userObject);
   } catch (error) {
     return res.status(500).send(error);
