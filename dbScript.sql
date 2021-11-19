@@ -18,8 +18,7 @@ CREATE TABLE "users" (
 CREATE TABLE "signature" (
 	"id" serial NOT NULL,
 	"signature_date" timestamp with time zone NOT NULL DEFAULT 'NOW()',
-	"plans_id" integer NOT NULL,
-	"delivery_date" varchar(255) NOT NULL,
+	"delivery_date_id" integer NOT NULL,
 	"product_options_id" integer NOT NULL,
 	"user_id" integer NOT NULL,
 	"address_id" integer NOT NULL,
@@ -33,7 +32,7 @@ CREATE TABLE "signature" (
 CREATE TABLE "plans" (
 	"id" serial NOT NULL,
 	"name" varchar(255) NOT NULL UNIQUE,
-	CONSTRAINT "Plans_pk" PRIMARY KEY ("id")
+	CONSTRAINT "plans_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
@@ -43,7 +42,7 @@ CREATE TABLE "plans" (
 CREATE TABLE "product_options" (
 	"id" serial NOT NULL,
 	"name" varchar(255) NOT NULL UNIQUE,
-	CONSTRAINT "produc_options_pk" PRIMARY KEY ("id")
+	CONSTRAINT "product_options_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
@@ -63,11 +62,24 @@ CREATE TABLE "address" (
 
 
 
+CREATE TABLE "delivery_date" (
+	"id" serial NOT NULL,
+	"name" varchar(255) NOT NULL UNIQUE,
+	"plan_id" integer NOT NULL,
+	CONSTRAINT "delivery_date_pk" PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
 
-ALTER TABLE "signature" ADD CONSTRAINT "signature_fk0" FOREIGN KEY ("plans_id") REFERENCES "plans"("id");
-ALTER TABLE "signature" ADD CONSTRAINT "signature_fk1" FOREIGN KEY ("product_options_id") REFERENCES "produc_options"("id");
+
+
+
+ALTER TABLE "signature" ADD CONSTRAINT "signature_fk0" FOREIGN KEY ("delivery_date_id") REFERENCES "delivery_date"("id");
+ALTER TABLE "signature" ADD CONSTRAINT "signature_fk1" FOREIGN KEY ("product_options_id") REFERENCES "product_options"("id");
 ALTER TABLE "signature" ADD CONSTRAINT "signature_fk2" FOREIGN KEY ("user_id") REFERENCES "users"("id");
 ALTER TABLE "signature" ADD CONSTRAINT "signature_fk3" FOREIGN KEY ("address_id") REFERENCES "address"("id");
+
+ALTER TABLE "delivery_date" ADD CONSTRAINT "delivery_date_fk0" FOREIGN KEY ("plan_id") REFERENCES "plans"("id");
 
 INSERT INTO "plans" ("name") VALUES ('semanal');
 INSERT INTO "plans" ("name") VALUES ('mensal');
@@ -76,7 +88,13 @@ INSERT INTO "product_options" ("name") VALUES ('Chás');
 INSERT INTO "product_options" ("name") VALUES ('Incensos');
 INSERT INTO "product_options" ("name") VALUES ('Produtos orgânicos');
 
+INSERT INTO "delivery_date" ("name","plan_id") VALUES ('Segunda',1);
+INSERT INTO "delivery_date" ("name","plan_id") VALUES ('Quarta',1);
+INSERT INTO "delivery_date" ("name","plan_id") VALUES ('Sexta',1);
 
+INSERT INTO "delivery_date" ("name","plan_id") VALUES ('01',2);
+INSERT INTO "delivery_date" ("name","plan_id") VALUES ('10',2);
+INSERT INTO "delivery_date" ("name","plan_id") VALUES ('20',2);
 
 
 
