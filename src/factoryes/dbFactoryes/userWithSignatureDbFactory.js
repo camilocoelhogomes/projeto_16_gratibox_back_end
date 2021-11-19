@@ -3,6 +3,7 @@ import connection from '../dbConfig.js';
 const userWithSignatureDbFactory = ({ userId }) => connection.query(`
 SELECT 
   users.complete_name AS "completeName",
+  users.name AS "name",
   address."zip_code" AS "cep",
   address."street" AS "street",
   address."neighborhood" AS "neighborhood",
