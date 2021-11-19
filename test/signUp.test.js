@@ -5,11 +5,11 @@ import connection from '../src/factoryes/dbConfig';
 import userFactory from './factory/userFactory.js';
 
 beforeAll(async () => {
-  await connection.query('DELETE FROM users');
+  await connection.query('DELETE FROM address;DELETE FROM users;');
 });
 
 afterAll(async () => {
-  await connection.query('DELETE FROM users');
+  await connection.query('DELETE FROM address;DELETE FROM users;');
 });
 
 describe('POST /sign-up', () => {
