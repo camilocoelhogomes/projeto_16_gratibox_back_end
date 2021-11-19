@@ -42,4 +42,15 @@ describe('POST /new-signature', () => {
     expect(result.status).toEqual(201);
     expect(finalSignatures.rowCount - initialSignatures.rowCount).toEqual(1);
   });
+
+  it('return 409 for conflict user', async () => {
+    const initialSignatures = await connection.query('SELECT * FROM signature;');
+    const result = await supertest(app)
+      .post('/new-signature')
+      .set('Authorization', `Bearer ${token}`)
+      .send(newSignature);
+    const finalSignatures = await connection.query('SELECT * FROM signature;');
+    expect(result.status).toEqual(409);
+    expect(finalSignatures.rowCount - initialSignatures.rowCount).toEqual(0);
+  });
 });

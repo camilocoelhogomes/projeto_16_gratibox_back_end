@@ -11,6 +11,7 @@ const newSignature = async (req, res) => {
     await signatureDbFactory({ ...signature, userId: userId.id });
     return res.status(201).send();
   } catch (error) {
+    if (error.code === '23505') return res.status(409).send({ errorMessage: 'conflict signature' });
     return res.status(500).send(error);
   }
 };

@@ -37,4 +37,15 @@ describe('/POST address', () => {
     expect(result.status).toEqual(200);
     expect(final.rowCount - initial.rowCount).toEqual(1);
   });
+
+  it('returns 409 for conflict address', async () => {
+    const initial = await connection.query('SELECT * FROM address;');
+    const result = await supertest(app)
+      .post('/validate-address')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ userAddress: address });
+    const final = await connection.query('SELECT * FROM address;');
+    expect(result.status).toEqual(409);
+    expect(final.rowCount - initial.rowCount).toEqual(0);
+  });
 });

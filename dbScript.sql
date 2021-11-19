@@ -20,7 +20,7 @@ CREATE TABLE "signature" (
 	"signature_date" timestamp with time zone NOT NULL DEFAULT 'NOW()',
 	"delivery_date_id" integer NOT NULL,
 	"product_options_id" integer NOT NULL,
-	"user_id" integer NOT NULL,
+	"user_id" integer NOT NULL UNIQUE,
 	CONSTRAINT "signature_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -54,7 +54,7 @@ CREATE TABLE "address" (
 	"street" varchar(255) NOT NULL,
 	"street_number" varchar(255) NOT NULL,
 	"neighborhood" varchar(255) NOT NULL,
-	"user_id" integer NOT NULL,
+	"user_id" integer NOT NULL UNIQUE,
 	CONSTRAINT "address_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
