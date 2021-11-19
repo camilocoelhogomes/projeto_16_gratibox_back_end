@@ -6,13 +6,14 @@ import '../src/setup.js';
 import userFactory from './factory/userFactory.js';
 import connection from '../src/factoryes/dbConfig.js';
 import signUpFactory from '../src/factoryes/dbFactoryes/signUpFactory.js';
+import deleteDb from './functions/delete.js';
 
 beforeAll(async () => {
-  await connection.query('DELETE FROM address;DELETE FROM users;');
+  await deleteDb;
 });
 
 afterAll(async () => {
-  await connection.query('DELETE FROM address;DELETE FROM users;');
+  await deleteDb;
 });
 
 describe('POST /validate-token', () => {

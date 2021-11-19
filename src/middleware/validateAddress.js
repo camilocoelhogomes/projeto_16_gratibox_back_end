@@ -23,6 +23,7 @@ const validateAddress = async (req, res, next) => {
     await addressDbFactory({ ...address, userId: userId.id });
     return next();
   } catch (error) {
+    if (error.code === '23505') return res.status(409).send({ errorMessage: 'conflict address' });
     return res.status(500).send(error);
   }
 };
