@@ -7,11 +7,11 @@ import connection from '../src/factoryes/dbConfig.js';
 import signUpFactory from '../src/factoryes/dbFactoryes/signUpFactory.js';
 
 beforeAll(async () => {
-  await connection.query('DELETE FROM users');
+  await connection.query('DELETE FROM address;DELETE FROM users;');
 });
 
 afterAll(async () => {
-  await connection.query('DELETE FROM users');
+  await connection.query('DELETE FROM address;DELETE FROM users;');
 });
 
 describe('POST /sign-in', () => {

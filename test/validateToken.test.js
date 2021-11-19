@@ -7,6 +7,14 @@ import userFactory from './factory/userFactory.js';
 import connection from '../src/factoryes/dbConfig.js';
 import signUpFactory from '../src/factoryes/dbFactoryes/signUpFactory.js';
 
+beforeAll(async () => {
+  await connection.query('DELETE FROM address;DELETE FROM users;');
+});
+
+afterAll(async () => {
+  await connection.query('DELETE FROM address;DELETE FROM users;');
+});
+
 describe('POST /validate-token', () => {
   const user = userFactory();
   let token;

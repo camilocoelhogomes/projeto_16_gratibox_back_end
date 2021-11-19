@@ -21,7 +21,6 @@ CREATE TABLE "signature" (
 	"delivery_date_id" integer NOT NULL,
 	"product_options_id" integer NOT NULL,
 	"user_id" integer NOT NULL,
-	"address_id" integer NOT NULL,
 	CONSTRAINT "signature_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -50,12 +49,13 @@ CREATE TABLE "product_options" (
 
 
 CREATE TABLE "address" (
-	"id" bigint NOT NULL,
-	"delivery_address" varchar(255) NOT NULL,
+	"id" serial NOT NULL,
 	"zip_code" varchar(255) NOT NULL,
 	"street" varchar(255) NOT NULL,
 	"street_number" varchar(255) NOT NULL,
-	"neighborhood" varchar(255) NOT NULL
+	"neighborhood" varchar(255) NOT NULL,
+	"user_id" integer NOT NULL,
+	CONSTRAINT "address_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
@@ -77,9 +77,13 @@ CREATE TABLE "delivery_date" (
 ALTER TABLE "signature" ADD CONSTRAINT "signature_fk0" FOREIGN KEY ("delivery_date_id") REFERENCES "delivery_date"("id");
 ALTER TABLE "signature" ADD CONSTRAINT "signature_fk1" FOREIGN KEY ("product_options_id") REFERENCES "product_options"("id");
 ALTER TABLE "signature" ADD CONSTRAINT "signature_fk2" FOREIGN KEY ("user_id") REFERENCES "users"("id");
-ALTER TABLE "signature" ADD CONSTRAINT "signature_fk3" FOREIGN KEY ("address_id") REFERENCES "address"("id");
+
+
+
+ALTER TABLE "address" ADD CONSTRAINT "address_fk0" FOREIGN KEY ("user_id") REFERENCES "users"("id");
 
 ALTER TABLE "delivery_date" ADD CONSTRAINT "delivery_date_fk0" FOREIGN KEY ("plan_id") REFERENCES "plans"("id");
+
 
 INSERT INTO "plans" ("name") VALUES ('semanal');
 INSERT INTO "plans" ("name") VALUES ('mensal');
