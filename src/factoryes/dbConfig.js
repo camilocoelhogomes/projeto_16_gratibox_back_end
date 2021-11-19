@@ -4,11 +4,11 @@ const { Pool } = pg;
 let databaseConfig;
 if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'dev') {
   databaseConfig = {
-    user: 'postgres',
-    password: '123456',
-    port: 5432,
-    host: 'localhost',
-    database: 'projeto_16_test',
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    port: Number(process.env.DB_PORT),
+    host: process.env.DB_HOST,
+    database: process.env.DB_DATABASE,
   };
 } else {
   databaseConfig = {
