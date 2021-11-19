@@ -3,13 +3,14 @@ import app from '../src/app.js';
 import '../src/setup.js';
 import connection from '../src/factoryes/dbConfig';
 import userFactory from './factory/userFactory.js';
+import deleteDb from './functions/delete.js';
 
 beforeAll(async () => {
-  await connection.query('DELETE FROM address;DELETE FROM users;');
+  await deleteDb;
 });
 
 afterAll(async () => {
-  await connection.query('DELETE FROM address;DELETE FROM users;');
+  await deleteDb;
 });
 
 describe('POST /sign-up', () => {

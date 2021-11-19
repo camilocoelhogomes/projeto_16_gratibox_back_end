@@ -16,6 +16,6 @@ app.post('/sign-up', signUp);
 app.post('/sign-in', signIn);
 app.post('/validate-token', validateToken, (req, res) => res.sendStatus(200));
 app.post('/validate-address', validateToken, validateAddress, (req, res) => res.sendStatus(200));
-app.post('/new-signature', validateToken, newSignature);
+app.post('/new-signature', validateToken, validateAddress, newSignature);
 
 export default app;

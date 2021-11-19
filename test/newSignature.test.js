@@ -6,22 +6,25 @@ import '../src/setup.js';
 import connection from '../src/factoryes/dbConfig.js';
 import userFactory from './factory/userFactory.js';
 import signUpFactory from '../src/factoryes/dbFactoryes/signUpFactory.js';
+import addressFactory from './factory/addressFactory.js';
+import deleteDb from './functions/delete.js';
 
 beforeAll(async () => {
-  await connection.query('DELETE FROM address;DELETE FROM users;');
+  await deleteDb;
 });
 
 afterAll(async () => {
-  await connection.query('DELETE FROM address;DELETE FROM users;');
+  await deleteDb;
 });
 
 describe('POST /new-signature', () => {
   const user = userFactory();
   let token;
+  const address = addressFactory();
   const newSignature = {
     userDeliveryDateId: Math.ceil(Math.random() * 6),
     userProductOptionsId: Math.ceil(Math.random() * 3),
-    userAddress: {},
+    userAddress: address,
   };
   beforeAll(async () => {
     await signUpFactory({ ...user, userPassword: bcrypt.hashSync(user.userPassword, 10) });
@@ -31,9 +34,12 @@ describe('POST /new-signature', () => {
 
   it('return 201 for new signature', async () => {
     const initialSignatures = await connection.query('SELECT * FROM signature;');
-    const result = await supertest(app).post('/new-signature').set('Authorization', `Bearer ${token}`).send(newSignature);
+    const result = await supertest(app)
+      .post('/new-signature')
+      .set('Authorization', `Bearer ${token}`)
+      .send(newSignature);
     const finalSignatures = await connection.query('SELECT * FROM signature;');
     expect(result.status).toEqual(201);
-    expect(initialSignatures.rowCount - finalSignatures.rowCount).toEqual(1);
+    expect(finalSignatures.rowCount - initialSignatures.rowCount).toEqual(1);
   });
 });
