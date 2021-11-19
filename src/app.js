@@ -1,3 +1,4 @@
+import './setup.js';
 import express from 'express';
 import cors from 'cors';
 import signUp from './controller/signUp/signUp.js';
@@ -10,7 +11,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get('/is-live', (req, res) => res.sendStatus(200));
+app.get('/is-live', (req, res) => res.status(200).send({
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  port: Number(process.env.DB_PORT),
+  host: process.env.DB_HOST,
+  database: process.env.DB_DATABASE,
+}));
 
 app.post('/sign-up', signUp);
 app.post('/sign-in', signIn);
