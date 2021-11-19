@@ -11,7 +11,6 @@ const newSignature = async (req, res) => {
     await signatureDbFactory({ ...signature, userId: userId.id });
     return res.status(201).send();
   } catch (error) {
-    console.log(error);
     return res.status(500).send(error);
   }
 };
