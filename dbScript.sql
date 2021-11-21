@@ -1,6 +1,6 @@
-DROP DATABASE projeto_16_test;
-CREATE DATABASE projeto_16_test;
-\c projeto_16_test;
+DROP DATABASE projeto_16_dev;
+CREATE DATABASE projeto_16_dev;
+\c projeto_16_dev;
 
 CREATE TABLE "users" (
 	"id" serial NOT NULL,
@@ -31,6 +31,8 @@ CREATE TABLE "signature" (
 CREATE TABLE "plans" (
 	"id" serial NOT NULL,
 	"name" varchar(255) NOT NULL UNIQUE,
+  "plan_description" TEXT NOT NULL,
+	"img_url" TEXT NOT NULL,
 	CONSTRAINT "plans_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -85,8 +87,8 @@ ALTER TABLE "address" ADD CONSTRAINT "address_fk0" FOREIGN KEY ("user_id") REFER
 ALTER TABLE "delivery_date" ADD CONSTRAINT "delivery_date_fk0" FOREIGN KEY ("plan_id") REFERENCES "plans"("id");
 
 
-INSERT INTO "plans" ("name") VALUES ('semanal');
-INSERT INTO "plans" ("name") VALUES ('mensal');
+INSERT INTO "plans" ("name","plan_description","img_url") VALUES ('semanal','Você recebe um box por semana.Ideal para quem quer exercer a gratidão todos os dias.','https://raw.githubusercontent.com/camilocoelhogomes/projeto_16_gratibox_front_end/main/src/assets/images/image04.jpg');
+INSERT INTO "plans" ("name","plan_description","img_url") VALUES ('mensal','Você recebe um box por mês.Ideal para quem está começando agora.','https://raw.githubusercontent.com/camilocoelhogomes/projeto_16_gratibox_front_end/main/src/assets/images/image02.jpg');
 
 INSERT INTO "product_options" ("name") VALUES ('Chás');
 INSERT INTO "product_options" ("name") VALUES ('Incensos');
