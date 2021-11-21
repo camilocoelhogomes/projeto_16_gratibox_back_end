@@ -6,6 +6,7 @@ import signIn from './controller/signIn/signIn.js';
 import validateToken from './middleware/validateToken.js';
 import newSignature from './controller/newSignature/newSignature.js';
 import validateAddress from './middleware/validateAddress.js';
+import getPlans from './controller/getPlans/getPlans.js';
 
 const app = express();
 app.use(cors());
@@ -18,5 +19,6 @@ app.post('/sign-in', signIn);
 app.post('/validate-token', validateToken, (req, res) => res.sendStatus(200));
 app.post('/validate-address', validateToken, validateAddress, (req, res) => res.sendStatus(200));
 app.post('/new-signature', validateToken, validateAddress, newSignature);
+app.get('/plans', getPlans);
 
 export default app;
