@@ -4,7 +4,9 @@ import signatureFormDbFactory from '../../factoryes/dbFactoryes/signatureFormDbF
 const getNewSignatureForm = async (req, res) => {
   try {
     const signatureForm = await signatureFormDbFactory();
+
     const signatureFormOutput = [];
+
     for (let i = 0; i < signatureForm.rowCount; i += 1) {
       if (!signatureFormOutput.some((item) => item.planId === signatureForm.rows[i].planId)) {
         signatureFormOutput.push({
@@ -25,6 +27,7 @@ const getNewSignatureForm = async (req, res) => {
           }) : ''));
       }
     }
+
     const productOptions = await getDbProductOptions();
     return res.status(200).send({
       signatureOptoins: signatureFormOutput,
