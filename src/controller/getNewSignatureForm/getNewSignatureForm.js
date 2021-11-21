@@ -29,8 +29,8 @@ const getNewSignatureForm = async (req, res) => {
     }
 
     const productOptions = await getDbProductOptions();
-    return res.status(200).sendgetDbProductOptions({
-      signatureOptoins: signatureFormOutput,
+    return res.status(200).send({
+      signatureOptions: signatureFormOutput,
       productOptions: productOptions.rows,
     });
   } catch (error) {
