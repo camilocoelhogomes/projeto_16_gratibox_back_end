@@ -1,6 +1,6 @@
-DROP DATABASE projeto_16_dev;
-CREATE DATABASE projeto_16_dev;
-\c projeto_16_dev;
+DROP DATABASE projeto_16_test;
+CREATE DATABASE projeto_16_test;
+\c projeto_16_test;
 
 CREATE TABLE "users" (
 	"id" serial NOT NULL,

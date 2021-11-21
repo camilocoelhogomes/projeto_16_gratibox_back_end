@@ -11,7 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get('/is-live', (req, res) => res.status(200).send());
+app.get('/is-live', (req, res) => res.status(200).send('Ok'));
 
 app.post('/sign-up', signUp);
 app.post('/sign-in', signIn);

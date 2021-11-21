@@ -5,7 +5,6 @@ import signUpFactory from '../../factoryes/dbFactoryes/signUpFactory.js';
 const signUp = async (req, res) => {
   const newUser = req.body;
   const validationError = validateSignUp({ signUpObject: newUser });
-
   if (validationError) return res.status(400).send(validationError.details);
   const cryptPassword = bcrypt.hashSync(newUser.userPassword, 10);
 
