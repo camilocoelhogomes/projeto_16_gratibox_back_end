@@ -1,4 +1,4 @@
-import plansDbFactory from '../../factoryes/dbFactoryes/plansDbFactory';
+import plansDbFactory from '../../factoryes/dbFactoryes/plansDbFactory.js';
 
 const getPlans = async (req, res) => {
   try {
