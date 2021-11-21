@@ -29,12 +29,12 @@ const getNewSignatureForm = async (req, res) => {
     }
 
     const productOptions = await getDbProductOptions();
-    return res.status(200).send({
+    return res.status(200).sendgetDbProductOptions({
       signatureOptoins: signatureFormOutput,
       productOptions: productOptions.rows,
     });
   } catch (error) {
-    return res.sendStatus(500);
+    return res.status(500).send(error);
   }
 };
 
