@@ -10,7 +10,7 @@ import addressFactory from './factory/addressFactory.js';
 import addressDbFactory from '../src/factoryes/dbFactoryes/addressDbFactory.js';
 import signatureDbFactory from '../src/factoryes/dbFactoryes/signatureDbFactory.js';
 import updateUserCompleteName from '../src/factoryes/dbFactoryes/updateUserCompleteName.js';
-import signatureInsertProductOptionsFactory from '../src/factoryes/dbFactoryes/signatureInsertProductOptions.js';
+import signatureInsertProductOptionsFactory from '../src/factoryes/dbFactoryes/signatureInsertProductOptionsFactory.js';
 
 beforeAll(async () => {
   await deleteDb;
