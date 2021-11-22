@@ -10,6 +10,7 @@ import addressFactory from './factory/addressFactory.js';
 import addressDbFactory from '../src/factoryes/dbFactoryes/addressDbFactory.js';
 import signatureDbFactory from '../src/factoryes/dbFactoryes/signatureDbFactory.js';
 import updateUserCompleteName from '../src/factoryes/dbFactoryes/updateUserCompleteName.js';
+import signatureInsertProductOptionsFactory from '../src/factoryes/dbFactoryes/signatureInsertProductOptionsFactory.js';
 
 beforeAll(async () => {
   await deleteDb;
@@ -25,7 +26,7 @@ describe('POST /sign-in', () => {
   const address = addressFactory();
   const signature = {
     userDeliveryDateId: Math.ceil(Math.random() * 6),
-    userProductOptionsId: Math.ceil(Math.random() * 3),
+    userProductOptionsId: [1, 2],
   };
 
   beforeAll(async () => {
@@ -36,6 +37,10 @@ describe('POST /sign-in', () => {
     await updateUserCompleteName({ completeName: address.completeName, userId: dbUser.rows[0].id });
     await addressDbFactory({ ...address, userId: dbUser.rows[0].id });
     await signatureDbFactory({ ...signature, userId: dbUser.rows[0].id });
+    await signatureInsertProductOptionsFactory({
+      productIds: signature.userProductOptionsId,
+      userId: dbUser.rows[0].id,
+    });
   });
 
   it('returns 200 for valid entries', async () => {
