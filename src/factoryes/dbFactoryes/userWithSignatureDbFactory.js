@@ -31,9 +31,13 @@ JOIN
 ON
   delivery_date."plan_id" = plans."id"
 JOIN
+  user_products
+ON
+  user_products."user_id" =  users."id"
+JOIN
   product_options
 ON
-  signature."product_options_id" = product_options."id"
+  product_options."id" = user_products."product_options_id"
 WHERE
   users.id = ($1);
 `, [userId]);

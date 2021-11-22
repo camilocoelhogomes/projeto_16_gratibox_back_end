@@ -27,7 +27,7 @@ const signIn = async (req, res) => {
       userObject.completeName = signature.rows[0].completeName;
       userObject.userPlanSignatureDate = signature.rows[0].userPlanSignatureDate;
       userObject.userPlan = signature.rows[0].userPlan;
-      userObject.productOption = signature.rows[0].productOption;
+      userObject.productOption = signature.rows.map((item) => item.productOption);
       userObject.deliveryDate = signature.rows[0].deliveryDate;
       userObject.userAddress = {
         cep: signature.rows[0].cep,

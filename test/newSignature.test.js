@@ -23,7 +23,7 @@ describe('POST /new-signature', () => {
   const address = addressFactory();
   const newSignature = {
     userDeliveryDateId: Math.ceil(Math.random() * 6),
-    userProductOptionsId: Math.ceil(Math.random() * 3),
+    userProductOptionsId: [1, 2],
     userAddress: address,
   };
   beforeAll(async () => {
