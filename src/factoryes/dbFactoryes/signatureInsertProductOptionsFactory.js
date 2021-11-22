@@ -1,4 +1,4 @@
-import connection from '../dbConfig';
+import connection from '../dbConfig.js';
 
 const signatureInsertProductOptionsFactory = ({ userId, productIds }) => {
   let query = 'INSERT INTO "user_products" ("user_id","product_options_id") VALUES ';

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import signatureDbFactory from '../../factoryes/dbFactoryes/signatureDbFactory.js';
-import signatureInsertProductOptionsFactory from '../../factoryes/dbFactoryes/signatureInsertProductOptions.js';
+import signatureInsertProductOptionsFactory from '../../factoryes/dbFactoryes/signatureInsertProductOptionsFactory.js';
 import validateNewSignature from './validateNewSignature.js';
 
 const newSignature = async (req, res) => {
