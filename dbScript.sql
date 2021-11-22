@@ -1,6 +1,6 @@
-DROP DATABASE projeto_16_test;
-CREATE DATABASE projeto_16_test;
-\c projeto_16_test;
+DROP DATABASE projeto_16_dev;
+CREATE DATABASE projeto_16_dev;
+\c projeto_16_dev;
 
 CREATE TABLE "users" (
 	"id" serial NOT NULL,
@@ -78,7 +78,7 @@ CREATE TABLE "user_products" (
 	"id" serial NOT NULL,
 	"product_options_id" integer NOT NULL,
 	"user_id" integer NOT NULL,
-	CONSTRAINT "user_products_pk" PRIMARY KEY ("id"),
+	CONSTRAINT "user_products_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
@@ -120,6 +120,7 @@ INSERT INTO "delivery_date" ("name","plan_id") VALUES ('Sexta',1);
 
 INSERT INTO "delivery_date" ("name","plan_id") VALUES ('10',2);
 INSERT INTO "delivery_date" ("name","plan_id") VALUES ('20',2);
+INSERT INTO "delivery_date" ("name","plan_id") VALUES ('30',2);
 
 
 
