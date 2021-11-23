@@ -1,7 +1,3 @@
-DROP DATABASE projeto_16_dev;
-CREATE DATABASE projeto_16_dev;
-\c projeto_16_dev;
-
 CREATE TABLE "users" (
 	"id" serial NOT NULL,
 	"name" varchar(255) NOT NULL,
